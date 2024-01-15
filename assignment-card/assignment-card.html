@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quadro de Anúncios</title>
+    <link rel="stylesheet" href="assignment-card.css">
+</head>
+<body>
+
+    <div id="loginSection">
+        <div class="card card-principal">
+            <h1 class="principal-title standard-color">
+                <span>Quadro de Designações</span>
+                <span class="week-info">Login</span>
+            </h1>
+
+            <h2 class="standard-color">Digite seu nome</h2>
+            <div class="align-between-st">
+                <!-- Input e botão para o usuário adicionar o nome -->
+                <input class="input-name" type="text" id="inputName" placeholder="Seu Nome">
+                <button onclick="buscar()">Buscar</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="assigmentsSection" style="display: none;">
+        <button onclick="backButton('assigmentsSection', 'loginSection')">Voltar</button>
+        <div class="card card-principal">
+            <h1 class="principal-title standard-color">
+                <span>Minhas designações</span>
+                <span class="week-info">Semana 4-10 de março</span>
+                <!-- <span class="week-info">Semana de {date}</span> -->
+            </h1>
+
+            <h2 class="standard-color">Reunião do Meio de Semana</h2>
+            <p>
+                Corpo do texto do card. Aqui você pode adicionar o conteúdo que desejar.
+            </p>
+
+            <h2 class="standard-color">Reunião do Fim de Semana</h2>
+            <p>
+                Corpo do texto do card. Aqui você pode adicionar o conteúdo que desejar.
+            </p>
+        </div>
+    </div>
+
+    <script src="assignment-card.js"></script>
+</body>
+</html>

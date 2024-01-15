@@ -1,0 +1,98 @@
+body {
+    font-family: 'Calibri', sans-serif;
+    background-color: #625298; /* Cor de fundo semelhante à do Salesforce */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+}
+
+@media screen and (max-width: 768px) {
+    h1{
+        font-size: 150%;
+    }
+    h2 {
+        font-size: 100%;
+    }
+    .card {
+        margin: 10px auto; /* Centraliza o card horizontalmente com uma margem externa */
+    }
+}
+
+.card {
+    background-color: #ffffff; /* Fundo branco */
+    border: 1px solid #d8dde6; /* Borda semelhante ao Salesforce */
+    border-radius: 0.25rem; /* Borda arredondada */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); /* Sombra leve */
+    padding: 1rem;
+    margin: 10px;
+    width: 100%;
+}
+
+.week-info{
+    font-size: 50%;
+}
+
+.card-principal{
+    min-width: 200px;
+    max-width: 800px;
+}
+
+.principal-title{
+    display: flex; 
+    flex-direction: row; 
+    justify-content: space-between;
+    align-items: flex-end;
+    padding: 0px;
+    margin: 0px;
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid black;
+}
+
+.standard-color{
+    color: #330f5c;
+}
+
+.align-between-st{
+    display: flex; 
+    flex-direction: row; 
+    justify-content: space-between;
+    align-items: flex-end;
+}
+
+/* Estilo para o botão */
+button {
+    background-color: #49296e; /* Cor de fundo do Salesforce */
+    color: #ffffff; /* Cor do texto branco */
+    padding: 0.5rem 1rem; /* Espaçamento interno */
+    border: 1px solid #1a072e; /* Sem borda */
+    border-radius: 0.25rem; /* Borda arredondada */
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Transição suave da cor de fundo */
+}
+
+/* Estilo para o botão quando passa o mouse */
+button:hover {
+    background-color: #330f5c; /* Cor de fundo mais escura quando passa o mouse */
+}
+
+/* Estilo para o input */
+input {
+    padding: 0.5rem; /* Espaçamento interno */
+    border: 1px solid #d8dde6; /* Borda semelhante ao Salesforce */
+    border-radius: 0.25rem; /* Borda arredondada */
+}
+
+/* Estilo para o input quando recebe foco */
+input:focus {
+    outline: none; /* Remove a borda de foco padrão */
+    border-color: #0052cc; /* Cor da borda quando o input está focado */
+    box-shadow: 0 0 0 0.2rem rgba(0, 82, 204, 0.25); /* Sombra de foco suave */
+}
+
+.input-name{
+    flex-grow: 1; /* Ocupa todo o espaço disponível */
+    margin-right: 0.3rem;
+}
