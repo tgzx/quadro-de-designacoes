@@ -34,6 +34,11 @@ body {
     margin: 0.5rem;
 }
 
+#loadingSection img {
+    max-width: 100%;
+    height: auto; /* Isso garante que a altura seja ajustada proporcionalmente à largura */
+}
+
 .week-info{
     font-size: 50%;
 }
