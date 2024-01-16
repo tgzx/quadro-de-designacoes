@@ -9,17 +9,11 @@ body {
     padding: 0;
 }
 
-@media screen and (max-width: 768px) {
-    h1{
-        font-size: 120%;
-    }
-    h2 {
-        font-size: 90%;
-    }
+/* @media screen and (max-width: 768px) {
     .card {
-        margin: 10px auto; /* Centraliza o card horizontalmente com uma margem externa */
+        margin: 10px auto;
     }
-}
+} */
 
 /* * {
     box-sizing: border-box;
@@ -59,6 +53,10 @@ body {
     margin-bottom: 1rem;
     padding-bottom: 1rem;
     border-bottom: 1px solid black;
+}
+
+.principal-subtitle{
+    font-size: 80%;
 }
 
 .standard-color{

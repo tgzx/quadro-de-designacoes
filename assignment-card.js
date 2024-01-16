@@ -12,22 +12,26 @@ function buscar() {
     let nome = document.getElementById('inputName').value;
 
     if (nome !== "" && nome !== undefined) {
-        document.getElementById('loginSection').style.display = 'none';
-        showLoading();
-        setTimeout(function() {
-            hideLoading();
-            document.getElementById('assigmentsSection').style.display = 'block';
-        }, 1500);
+        hideSection('loginSection');
+        showSection('assigmentsSection');
     } else {
         alert("Por favor, digite seu nome antes de buscar.");
     }
 }
 
 function backButton(actual, before) {
-    document.getElementById(actual).style.display = 'none';
+    hideSection(actual);
+    showSection(before);
+}
+
+function hideSection(section){
+    document.getElementById(section).style.display = 'none';
     showLoading();
+}
+
+function showSection(section){
     setTimeout(function() {
+        document.getElementById(section).style.display = 'block';
         hideLoading();
-        document.getElementById(before).style.display = 'block';
     }, 1500);
 }
