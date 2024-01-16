@@ -109,6 +109,10 @@ body {
     color: #330f5c;
 }
 
+.body-standard-text{
+    color: black;
+}
+
 .align-between-st {
     display: flex; 
     flex-direction: row; 

@@ -6,7 +6,7 @@
     <title>Quadro de Anúncios</title>
     <link rel="stylesheet" href="assignment-card.css">
 </head>
-<body>
+<body id="htmlBody">
 
     <div id="loadingSection" style="display: none;" class="card card-principal">
         <img id="loadingImage" src="images/loading-animation.gif" alt="Loading Animation">
@@ -31,18 +31,18 @@
         <button style="margin-left: 0.5rem;" onclick="backButton('assigmentsSection', 'loginSection')">Voltar</button>
         <div class="card card-principal">
             <h3 class="principal-title standard-color">
-                <span>Minhas designações</span>
-                <span class="week-info">Semana 4-10 de março</span>
+                <span >Minhas designações</span>
+                <span id="week-info" class="week-info">Semana 4-10 de março</span>
                 <!-- <span class="week-info">Semana de {date}</span> -->
             </h3>
 
             <h4 class="standard-color">Reunião do Meio de Semana</h4>
-            <p>
+            <p class="body-standard-text">
                 Corpo do texto do card. Aqui você pode adicionar o conteúdo que desejar.
             </p>
 
             <h4 class="standard-color">Reunião do Fim de Semana</h4>
-            <p>
+            <p class="body-standard-text">
                 Corpo do texto do card. Aqui você pode adicionar o conteúdo que desejar.
             </p>
         </div>

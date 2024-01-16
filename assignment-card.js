@@ -41,23 +41,46 @@ function showSection(section){
 document.addEventListener('DOMContentLoaded', function() { // como se fosse o ConnectedCallBack
     // Código a ser executado quando o DOM estiver completamente carregado
     console.log('O DOM foi completamente carregado.');  
-    // Verifique a cor do cartão e inverte as cores do loading se necessário.
-    checkCardColor();
+    // atualiza para o modo escuro de acordo com o navegador
+    updateDarkMode();
 });
   
-function checkCardColor() {
-    const card = document.querySelector('.card-principal');
+function updateDarkMode() {
+    //verifica se o navegador esta no modo escuro
     const loadingImage = document.getElementById('loadingImage');
+    const body = document.getElementById('htmlBody');
+
+    const prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    loadingImage.style.filter = prefersDarkMode ? 'invert(0.86)' : 'invert(0)';
+    body.style.backgroundColor = prefersDarkMode ? '#0f1114' : '#625298';
+
+    console.log('prefersDarkMode => ' + JSON.stringify(prefersDarkMode));
   
-    if (card) {
-        // Obtenha a cor de fundo do cartão
-      const cardColor = getComputedStyle(card).backgroundColor;  
-      console.log('Cor do cartão:', cardColor);  
-      // Verifique se a cor do cartão é diferente de branco (#ffffff)
-      if (cardColor !== 'rgb(255, 255, 255)') {
-            // Inverte as cores do loading com base no modo escuro
-            const prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
-            loadingImage.style.filter = prefersDarkMode ? 'invert(1)' : 'invert(0)';
+    const cards = document.querySelectorAll('.card, .standard-color, .body-standard-text, .principal-title, .input-name');
+    console.log('cards=> ' + JSON.stringify(cards));
+    cards.forEach(card => {
+            if(prefersDarkMode == true){
+                card.style.backgroundColor = 'rgb(35, 37, 38)';
+
+                if (card.classList.contains('principal-title')) {
+                    card.style.borderBottom = '1px solid gray';
+                }
+
+                if(card.classList.contains('card')){
+                    card.style.border = 'rgb(35, 37, 38)';
+                }
+
+                if(card.classList.contains('input-name')){
+                    card.style.border = '1px solid #5b5b5b';
+                    card.style.color = 'white';
+                }
+
+                if (card.classList.contains('body-standard-text')) {
+                    card.style.color = 'white';
+                } else if (card.classList.contains('standard-color')){
+                    card.style.color = '#9271b7';
+                }
+            }
         }
-    }
+    );
 }
