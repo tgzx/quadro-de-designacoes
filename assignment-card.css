@@ -31,7 +31,7 @@ body {
     }
 
     .card-principal{
-        min-width: 450px;
+        min-width: 400px;
         max-width: 700px;
     }
 
@@ -42,6 +42,7 @@ body {
 
 @media screen and (min-width: 768px) {
     body{
+        height: 50vh;
         align-items: center;
     }
 
@@ -70,6 +71,7 @@ body {
 }
 
 #loadingSection img {
+    border-radius: 0.5rem;
     max-width: 100%;
     height: auto; /* Isso garante que a altura seja ajustada proporcionalmente à largura */
     width: 400px;

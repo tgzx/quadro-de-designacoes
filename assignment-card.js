@@ -34,3 +34,30 @@ function showSection(section){
         hideLoading();
     }, 1500);
 }
+
+// Verifica se o usuário está usando o modo escuro
+// const prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+document.addEventListener('DOMContentLoaded', function() { // como se fosse o ConnectedCallBack
+    // Código a ser executado quando o DOM estiver completamente carregado
+    console.log('O DOM foi completamente carregado.');  
+    // Verifique a cor do cartão e inverte as cores do loading se necessário.
+    checkCardColor();
+});
+  
+function checkCardColor() {
+    const card = document.querySelector('.card-principal');
+    const loadingImage = document.getElementById('loadingImage');
+  
+    if (card) {
+        // Obtenha a cor de fundo do cartão
+      const cardColor = getComputedStyle(card).backgroundColor;  
+      console.log('Cor do cartão:', cardColor);  
+      // Verifique se a cor do cartão é diferente de branco (#ffffff)
+      if (cardColor !== 'rgb(255, 255, 255)') {
+            // Inverte as cores do loading com base no modo escuro
+            const prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            loadingImage.style.filter = prefersDarkMode ? 'invert(1)' : 'invert(0)';
+        }
+    }
+}
