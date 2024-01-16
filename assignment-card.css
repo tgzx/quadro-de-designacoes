@@ -9,20 +9,48 @@ body {
     font-size: 130%;
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 500px) {
     body{
         padding-top: 1rem;
         font-size: 110%;
     }
+
+    .card-principal{
+        min-width: 200px;
+        max-width: 500px;
+    }
+
     /* .card-principal{
         width: 300px;
     } */
 }
 
-@media screen and (min-width: 780px) {
+@media screen and (min-width: 501) and (max-width: 767px){
+    body{
+        padding-top: 1rem;
+        font-size: 110%;
+    }
+
+    .card-principal{
+        min-width: 350px;
+        min-width: 767px;
+    }
+
+    /* .card-principal{
+        width: 300px;
+    } */
+}
+
+@media screen and (min-width: 768px) {
     body{
         align-items: center;
     }
+
+    .card-principal {
+        min-width: 300px;
+        max-width: 800px;
+    }
+
     #loginSection {
         font-size: 150%;
         width: 600px;
@@ -52,10 +80,10 @@ body {
     font-size: 80%;
 }
 
-.card-principal {
-    min-width: 320px;
+/* .card-principal {
+    min-width: 200px;
     max-width: 800px;
-}
+} */
 
 .principal-title {
     display: flex; 
