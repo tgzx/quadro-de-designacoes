@@ -1,5 +1,3 @@
-let isLoading = false;
-
 function showLoading() {
     document.getElementById('loadingSection').style.display = 'block';
 }
@@ -8,12 +6,13 @@ function hideLoading() {
     document.getElementById('loadingSection').style.display = 'none';
 }
 
-function buscar() {
+function search() {
     let nome = document.getElementById('inputName').value;
 
     if (nome !== "" && nome !== undefined) {
         hideSection('loginSection');
         showSection('assigmentsSection');
+        document.getElementById('inputName').value = "";
     } else {
         alert("Por favor, digite seu nome antes de buscar.");
     }
