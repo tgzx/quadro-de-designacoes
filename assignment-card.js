@@ -17,7 +17,7 @@ function buscar() {
         setTimeout(function() {
             hideLoading();
             document.getElementById('assigmentsSection').style.display = 'block';
-        }, 500);
+        }, 1500);
     } else {
         alert("Por favor, digite seu nome antes de buscar.");
     }
@@ -29,5 +29,5 @@ function backButton(actual, before) {
     setTimeout(function() {
         hideLoading();
         document.getElementById(before).style.display = 'block';
-    }, 500);
+    }, 1500);
 }
