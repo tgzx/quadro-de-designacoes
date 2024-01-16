@@ -6,19 +6,24 @@ body {
     justify-content: center;
     height: 100vh;
     margin: 0;
+    padding: 0;
 }
 
 @media screen and (max-width: 768px) {
     h1{
-        font-size: 150%;
+        font-size: 120%;
     }
     h2 {
-        font-size: 100%;
+        font-size: 90%;
     }
     .card {
         margin: 10px auto; /* Centraliza o card horizontalmente com uma margem externa */
     }
 }
+
+/* * {
+    box-sizing: border-box;
+} */
 
 .card {
     background-color: #ffffff; /* Fundo branco */
@@ -26,8 +31,7 @@ body {
     border-radius: 0.25rem; /* Borda arredondada */
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); /* Sombra leve */
     padding: 1rem;
-    margin: 10px;
-    width: 100%;
+    margin: 0.5rem;
 }
 
 .week-info{
