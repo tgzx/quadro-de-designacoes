@@ -48,16 +48,16 @@ body {
     width: 400px;
 }
 
-.week-info{
+.week-info {
     font-size: 80%;
 }
 
-.card-principal{
-    min-width: 300px;
+.card-principal {
+    min-width: 320px;
     max-width: 800px;
 }
 
-.principal-title{
+.principal-title {
     display: flex; 
     flex-direction: row; 
     justify-content: space-between;
@@ -69,18 +69,18 @@ body {
     border-bottom: 1px solid black;
 }
 
-.principal-subtitle{
+.principal-subtitle {
     margin:0;
     margin-top: 0.3rem;
     margin-bottom: 0.6rem;
     font-size: 80%;
 }
 
-.standard-color{
+.standard-color {
     color: #330f5c;
 }
 
-.align-between-st{
+.align-between-st {
     display: flex; 
     flex-direction: row; 
     justify-content: space-between;
@@ -117,7 +117,7 @@ input:focus {
     box-shadow: 0 0 0 0.2rem rgba(0, 82, 204, 0.25); /* Sombra de foco suave */
 }
 
-.input-name{
+.input-name {
     flex-grow: 1; /* Ocupa todo o espaço disponível */
     margin-right: 0.3rem;
 }
