@@ -2,7 +2,6 @@ body {
     font-family: 'Calibri', sans-serif;
     background-color: #625298; /* Cor de fundo semelhante à do Salesforce */
     display: flex;
-    align-items: center;
     justify-content: center;
     height: 100vh;
     margin: 0;
@@ -12,6 +11,7 @@ body {
 
 @media screen and (max-width: 768px) {
     body{
+        padding-top: 1rem;
         font-size: 100%;
     }
     /* .card-principal{
@@ -20,6 +20,9 @@ body {
 }
 
 @media screen and (min-width: 780px) {
+    body{
+        align-items: center;
+    }
     #loginSection {
         font-size: 150%;
         width: 600px;
