@@ -1,3 +1,5 @@
+//changeTextById('week-info', semanaInfo);
+
 function showLoading() {
     document.getElementById('loadingSection').style.display = 'block';
 }
@@ -34,15 +36,27 @@ function showSection(section){
         hideLoading();
     }, 1500);
 }
+function changeTextById(elementId, newText) {
+    // Obtém a referência para o elemento com base no ID
+    const element = document.getElementById(elementId);
 
-// Verifica se o usuário está usando o modo escuro
-// const prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    // Verifica se o element foi encontrado
+    if (element) {
+        // Atualiza o conteúdo de texto do element
+        element.textContent = newText;
+    } else {
+        console.error(`Elemento com ID '${elementId}' não encontrado.`);
+    }
+}
 
 document.addEventListener('DOMContentLoaded', function() { // como se fosse o ConnectedCallBack
     // Código a ser executado quando o DOM estiver completamente carregado
     console.log('O DOM foi completamente carregado.');  
-    // atualiza para o modo escuro de acordo com o navegador
-    updateDarkMode();
+    // de tempos em tempos ele verifica o tema do navegador para trocar o tema do quadro juntamente
+    setInterval(() => {
+        console.log('Dark mode');
+        updateDarkMode();
+    }, 5000);
 });
   
 function updateDarkMode() {
@@ -79,6 +93,27 @@ function updateDarkMode() {
                     card.style.color = 'white';
                 } else if (card.classList.contains('standard-color')){
                     card.style.color = '#9271b7';
+                }
+            } else {
+                card.style.backgroundColor = 'white';
+
+                if (card.classList.contains('principal-title')) {
+                    card.style.borderBottom = '1px solid gray';
+                }
+
+                if(card.classList.contains('card')){
+                    card.style.border = 'white';
+                }
+
+                if(card.classList.contains('input-name')){
+                    card.style.border = '1px solid black';
+                    card.style.color = 'grey';
+                }
+
+                if (card.classList.contains('body-standard-text')) {
+                    card.style.color = 'black';
+                } else if (card.classList.contains('standard-color')){
+                    card.style.color = '#330f5c';
                 }
             }
         }
