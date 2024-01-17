@@ -53,10 +53,11 @@ document.addEventListener('DOMContentLoaded', function() { // como se fosse o Co
     // Código a ser executado quando o DOM estiver completamente carregado
     console.log('O DOM foi completamente carregado.');  
     // de tempos em tempos ele verifica o tema do navegador para trocar o tema do quadro juntamente
+    updateDarkMode();
     setInterval(() => {
         console.log('Dark mode');
         updateDarkMode();
-    }, 5000);
+    }, 600);
 });
   
 function updateDarkMode() {
