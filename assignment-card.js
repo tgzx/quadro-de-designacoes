@@ -12,8 +12,9 @@ function search() {
     let nome = document.getElementById('inputName').value;
 
     if (nome !== "" && nome !== undefined) {
-        hideSection('loginSection');
-        showSection('assigmentsSection');
+        hideElement('loginSection');
+        showElement('assigmentsSection');
+        showElement('buttonBack');
         document.getElementById('inputName').value = "";
     } else {
         alert("Por favor, digite seu nome antes de buscar.");
@@ -21,26 +22,27 @@ function search() {
 }
 
 function backButton(actual, before) {
-    hideSection(actual);
-    showSection(before);
+    hideElement(actual);
+    showElement(before);
+
+    if(before === 'loginSection'){
+        hideElement('buttonBack');
+    }
 }
 
-function hideSection(section){
-    document.getElementById(section).style.display = 'none';
+function hideElement(element){
+    document.getElementById(element).style.display = 'none';
     showLoading();
 }
 
-function showSection(section){
+function showElement(element){
     setTimeout(function() {
-        document.getElementById(section).style.display = 'block';
+        document.getElementById(element).style.display = 'block';
         hideLoading();
     }, 1500);
 }
 function changeTextById(elementId, newText) {
-    // Obtém a referência para o elemento com base no ID
     const element = document.getElementById(elementId);
-
-    // Verifica se o element foi encontrado
     if (element) {
         // Atualiza o conteúdo de texto do element
         element.textContent = newText;
@@ -50,26 +52,52 @@ function changeTextById(elementId, newText) {
 }
 
 document.addEventListener('DOMContentLoaded', function() { // como se fosse o ConnectedCallBack
-    // Código a ser executado quando o DOM estiver completamente carregado
     console.log('O DOM foi completamente carregado.');  
+    showElement('loginSection');
     // de tempos em tempos ele verifica o tema do navegador para trocar o tema do quadro juntamente
-    updateDarkMode();
-    setInterval(() => {
-        console.log('Dark mode');
-        updateDarkMode();
-    }, 600);
+    // updateDarkMode();
+    // setInterval(() => {
+    //     console.log('Dark mode');
+    //     updateDarkMode();
+    // }, 600);
 });
+
+function changeCSSById(elementId, styleProperty, value) {
+    const element = document.getElementById(elementId);
+
+    if (element) {
+        // Atualiza a propriedade de estilo do elemento
+        element.style[styleProperty] = value;
+    } else {
+        console.error(`Elemento com ID '${elementId}' não encontrado.`);
+    }
+}
   
 function updateDarkMode() {
     //verifica se o navegador esta no modo escuro
     const loadingImage = document.getElementById('loadingImage');
     const body = document.getElementById('htmlBody');
 
-    const prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    //const prefersDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+    let prefersDarkMode = null;
+
+    const card = document.querySelector('.card');
+
+    if(getComputedStyle(card).backgroundColor == 'rgb(35, 37, 38)'){
+        changeTextById('buttonDarkMode', '☀');
+        changeCSSById('buttonDarkMode', 'padding', '1px 5px 2px 5px');
+        prefersDarkMode = false;
+    } else {
+        changeTextById('buttonDarkMode', '☽');
+        changeCSSById('buttonDarkMode', 'padding', '1px 8px 2px 8px');
+        prefersDarkMode = true
+    }
+
     loadingImage.style.filter = prefersDarkMode ? 'invert(0.86)' : 'invert(0)';
     body.style.backgroundColor = prefersDarkMode ? '#0f1114' : '#625298';
 
-    console.log('prefersDarkMode => ' + JSON.stringify(prefersDarkMode));
+    //console.log('prefersDarkMode => ' + JSON.stringify(prefersDarkMode));
   
     const cards = document.querySelectorAll('.card, .standard-color, .body-standard-text, .principal-title, .input-name');
     console.log('cards=> ' + JSON.stringify(cards));

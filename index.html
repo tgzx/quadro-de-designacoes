@@ -8,43 +8,53 @@
 </head>
 <body id="htmlBody">
 
-    <div id="loadingSection" style="display: none;" class="card card-principal">
-        <img id="loadingImage" src="images/loading-animation.gif" alt="Loading Animation">
-    </div>
-
-    <div id="loginSection">
-        <div class="card card-principal">
-            <h4 class="principal-title standard-color">
-                <span>Quadro de Designações</span>
-            </h4>
-
-            <h4 class="standard-color principal-subtitle">Digite seu nome</h4>
-            <div class="align-between-st">
-                <!-- Input e botão para o usuário adicionar o nome -->
-                <input class="input-name" type="text" id="inputName" placeholder="Seu nome aqui">
-                <button onclick="search()">Buscar</button>
+    <div>
+        <div id="headWindow" class="head-window">
+            <div>
+                <button id="buttonBack" style="margin-left: 0.5rem; display: none" onclick="backButton('assigmentsSection', 'loginSection')">Voltar</button>
+            </div>
+            <div>
+                <button id="buttonDarkMode" style="margin-right: 0.5rem; padding: 1px 5px 2px 5px; font-size: large;" onclick="updateDarkMode()">☀</button>
             </div>
         </div>
-    </div>
-
-    <div id="assigmentsSection" style="display: none;">
-        <button style="margin-left: 0.5rem;" onclick="backButton('assigmentsSection', 'loginSection')">Voltar</button>
-        <div class="card card-principal">
-            <h3 class="principal-title standard-color">
-                <span >Minhas designações</span>
-                <span id="week-info" class="week-info">Semana 4-10 de março</span>
-                <!-- <span class="week-info">Semana de {date}</span> -->
-            </h3>
-
-            <h4 class="standard-color">Reunião do Meio de Semana</h4>
-            <p class="body-standard-text">
-                Corpo do texto do card. Aqui você pode adicionar o conteúdo que desejar.
-            </p>
-
-            <h4 class="standard-color">Reunião do Fim de Semana</h4>
-            <p class="body-standard-text">
-                Corpo do texto do card. Aqui você pode adicionar o conteúdo que desejar.
-            </p>
+    
+        <div id="loadingSection" style="display: block;" class="card card-principal">
+            <img id="loadingImage" src="images/loading-animation.gif" alt="Loading Animation">
+        </div>
+    
+        <div id="loginSection" style="display: none;">
+            <div class="card card-principal">
+                <h4 class="principal-title standard-color">
+                    <span>Quadro de Designações</span>
+                </h4>
+    
+                <h4 class="standard-color principal-subtitle">Digite seu nome</h4>
+                <div class="align-between-st">
+                    <!-- Input e botão para o usuário adicionar o nome -->
+                    <input class="input-name" type="text" id="inputName" placeholder="Seu nome aqui">
+                    <button onclick="search()">Buscar</button>
+                </div>
+            </div>
+        </div>
+    
+        <div id="assigmentsSection" style="display: none;">
+            <div class="card card-principal">
+                <h3 class="principal-title standard-color">
+                    <span >Minhas designações</span>
+                    <span id="week-info" class="week-info">Semana 4-10 de março</span>
+                    <!-- <span class="week-info">Semana de {date}</span> -->
+                </h3>
+    
+                <h4 class="standard-color">Reunião do Meio de Semana</h4>
+                <p class="body-standard-text">
+                    Corpo do texto do card. Aqui você pode adicionar o conteúdo que desejar.
+                </p>
+    
+                <h4 class="standard-color">Reunião do Fim de Semana</h4>
+                <p class="body-standard-text">
+                    Corpo do texto do card. Aqui você pode adicionar o conteúdo que desejar.
+                </p>
+            </div>
         </div>
     </div>
 

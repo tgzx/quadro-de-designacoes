@@ -77,6 +77,13 @@ body {
     width: 400px;
 }
 
+.head-window{
+    display: flex;
+    flex-direction: row; 
+    justify-content: space-between;
+    align-items: flex-end;  
+}
+
 .week-info {
     font-size: 80%;
 }
