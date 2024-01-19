@@ -1,5 +1,7 @@
 //changeTextById('week-info', semanaInfo);
 
+today = null;
+
 function showLoading() {
     document.getElementById('loadingSection').style.display = 'block';
 }
@@ -8,12 +10,13 @@ function hideLoading() {
 }
 
 function search() {
-    let nome = document.getElementById('inputName').value;
+    let name = document.getElementById('inputName').value;
 
-    if (nome !== "" && nome !== undefined) {
+    if (name !== "" && name !== undefined) {
         hideElement('loginSection');
         showElement('assigmentsSection');
         showElement('buttonBack');
+        readBD(name);
         document.getElementById('inputName').value = "";
     } else {
         alert("Por favor, digite seu nome antes de buscar.");
@@ -26,6 +29,8 @@ function backButton(actual, before) {
 
     if(before === 'loginSection'){
         hideElement('buttonBack');
+        changeTextById('meioDeSemana-assignment', 'Nenhuma designação encontrada.'); 
+        changeTextById('fimDeSemana-assignment', 'Nenhuma designação encontrada.');
     }
 }
 
@@ -43,7 +48,7 @@ function changeTextById(elementId, newText) {
     const element = document.getElementById(elementId);
     if (element) {
         // Atualiza o conteúdo de texto do element
-        element.textContent = newText;
+        element.innerHTML = newText;
     } else {
         console.error(`Elemento com ID '${elementId}' não encontrado.`);
     }
@@ -59,9 +64,131 @@ function changeCSSById(elementId, styleProperty, value) {
     }
 }
 
+function readBD(name) {
+    const bdJSONPath = 'data/bd.json';
+    let bdJSON = {};
+
+    fetch(bdJSONPath)
+    .then(response => response.json())
+    .then(data => {
+        console.log('Conteúdo do bdJSON:');
+        console.log(data);
+
+        // Iterar sobre as designações semanais
+        data.weeklyAssignments.forEach(assign => {
+            // Converter a string de data para um objeto Date
+            const datePresWork = new Date(stringToDate(assign.date));
+            console.log('datePresWork => ' + datePresWork);
+        
+            // Verificar se a data atual está na mesma semana da data da designação
+            if (sameWeek(today, datePresWork)) {
+                console.log(`A data atual ${today.toDateString()} está na mesma semana da designação em ${datePresWork.toDateString()}`);
+            } else {
+                console.log(`A data atual ${today.toDateString()} não está na mesma semana da designação em ${datePresWork.toDateString()}`);
+            }
+        });
+
+        bdJSON = data.weeklyAssignments;
+
+        console.log('bdJSON => ' + JSON.stringify(bdJSON));
+        
+        let nameFound = false;
+
+        bdJSON.forEach(week => {
+            console.log('week => ' + JSON.stringify(week));
+            if (stringToDate(week.date) >= today) {
+                week.presenters.forEach(presenter => {
+                    if(presenter.name === name){
+                        nameFound = true;
+                        let designationsMiddleWeek = '';
+                        let designationsEndWeek = '';
+                        presenter.presentations.forEach(presentation => {                            
+                            if(presentation.meetId === 'meioDeSemana'){
+                                designationsMiddleWeek = designationsMiddleWeek + presentation.name;
+
+                                if (presentation.lesson) {
+                                    designationsMiddleWeek += ' - ' + presentation.lesson;
+                                }
+                                designationsMiddleWeek += '<br>';
+                            }
+                            if(presentation.meetId === 'fimDeSemana'){
+                                designationsEndWeek = designationsEndWeek + presentation.name;
+
+                                if (presentation.lesson) {
+                                    designationsEndWeek += ' - ' + presentation.lesson;
+                                }
+                                designationsEndWeek += '<br>';
+                            }
+                        })
+                        presenter.works.forEach(work => {
+                            if(work.meetId === 'meioDeSemana'){
+                                designationsMiddleWeek = designationsMiddleWeek + ' ' + work.name + '<br>';
+                            }
+                            if(work.meetId === 'fimDeSemana'){
+                                designationsEndWeek = designationsEndWeek + ' ' + work.name + '<br>';
+                            }
+                        })
+
+                        changeTextById('meioDeSemana-assignment', designationsMiddleWeek); 
+                        changeTextById('fimDeSemana-assignment', designationsEndWeek);
+                    }
+                })
+            }
+        });
+
+        if(!nameFound){
+            alert(`Não foi encontrado uma designação para "${name}".`);
+        }
+    })
+    .catch(error => 
+        console.error('Erro ao carregar o arquivo JSON:', error)
+    );
+}
+function sameWeek(date1, date2) {
+    const oneWeek = 7 * 24 * 60 * 60 * 1000; // milissegundos em uma semana
+    const diff = Math.abs(date1 - date2);
+  
+    return diff < oneWeek;
+}
+function stringToDate(dateString) {
+    const parts = dateString.split('/');
+    const day = parseInt(parts[0], 10);
+    const month = parseInt(parts[1] - 1, 10); // Mês no JavaScript é baseado em zero
+    const year = parseInt(parts[2], 10);
+  
+    return new Date(year, month, day);
+}
+function dateFormatter(data) {
+    const months = [
+        'Janeiro',
+        'Fevereiro',
+        'Março',
+        'Abril',
+        'Maio',
+        'Junho',
+        'Julho',
+        'Agosto',
+        'Setembro',
+        'Outubro',
+        'Novembro',
+        'Dezembro'
+    ];
+    const day = data.getDate();
+    const weekDayIndex = data.getDay();
+    const monthName = months[data.getMonth()];
+
+    // Calcula o primeiro e último dia da semana
+    const firstWeekDay = day - weekDayIndex + 1;
+    const lastWeekDay = firstWeekDay + 6;
+
+    return `Semana ${firstWeekDay}-${lastWeekDay} de ${monthName}`;
+}
+
 document.addEventListener('DOMContentLoaded', function() { // como se fosse o ConnectedCallBack
-    console.log('O DOM foi completamente carregado.');  
+    console.log('O DOM foi completamente carregado.');
     showElement('loginSection');
+    today = new Date();
+    changeTextById('week-info', dateFormatter(today));
     // Carrega a preferência de tema salva no localStorage
     const savedTheme = localStorage.getItem('theme');
     if (savedTheme) {

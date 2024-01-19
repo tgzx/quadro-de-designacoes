@@ -1,0 +1,53 @@
+{
+    "weeklyAssignments": [
+        {
+            "date": "20/01/2024",
+            "presenters": [
+                {
+                    "name": "Tiago",
+                    "presentations": [
+                        {
+                            "meetTheme": "Faça seu melhor no Ministério",
+                            "name": "Discurso: Quem é Jesus?",
+                            "lesson": "Melhore lição 3",
+                            "meetId": "meioDeSemana"
+                        },
+                        {
+                            "meetTheme": "Vida e Ministério",
+                            "name": "Discurso com vídeo: Quem o Arcanjo?",
+                            "lesson": "",
+                            "meetId": "meioDeSemana"
+                        }
+                    ],
+                    "works": [
+                        {
+                            "name": "Indicador",
+                            "meetId": "fimDeSemana"
+                        },
+                                                {
+                            "name": "Volante",
+                            "meetId": "meioDeSemana"
+                        }
+                    ]
+                },
+                {
+                    "name": "Lucas",
+                    "presentations": [
+                        {
+                            "meetTheme": "Faça seu melhor no Ministério",
+                            "name": "Leitura de livro",
+                            "lesson": "",
+                            "meetId": "meioDeSemana"
+                        }
+                    ],
+                    "works": [
+                        {
+                            "name": "Som",
+                            "meetId": "fimDeSemana"
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
