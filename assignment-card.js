@@ -23,11 +23,12 @@ function search() {
     }
 }
 
-function backButton(actual, before) {
-    hideElement(actual);
-    showElement(before);
+function backButton(home) {
+    hideElement('assigmentsSection');
+    hideElement('feedDataSection');
+    showElement(home);
 
-    if(before === 'loginSection'){
+    if(home === 'loginSection'){
         hideElement('buttonBack');
         changeTextById('meioDeSemana-assignment', 'Nenhuma designação encontrada.'); 
         changeTextById('fimDeSemana-assignment', 'Nenhuma designação encontrada.');
@@ -207,7 +208,7 @@ document.addEventListener('DOMContentLoaded', function() { // como se fosse o Co
         if (theme === 'dark') {
             // Aplica o tema escuro
             changeTextById('buttonDarkMode', '☽');
-            changeCSSById('buttonDarkMode', 'padding', '2px 9px 4px 9px');
+            //changeCSSById('buttonDarkMode', 'padding', '2px 9px 4px 9px');
             prefersDarkMode = true;
 
             loadingImage.style.filter = 'invert(0.86)';
@@ -215,7 +216,7 @@ document.addEventListener('DOMContentLoaded', function() { // como se fosse o Co
         } else {
             // Aplica o tema claro
             changeTextById('buttonDarkMode', '☀');                //C   D   B    E
-            changeCSSById('buttonDarkMode', 'padding', '3px 7px 4px 7px');
+            //changeCSSById('buttonDarkMode', 'padding', '3px 7px 4px 7px');
             prefersDarkMode = false;
 
             loadingImage.style.filter = 'invert(0)';
@@ -266,11 +267,11 @@ function updateDarkMode() {
 
     if(getComputedStyle(card).backgroundColor == 'rgb(35, 37, 38)'){
         changeTextById('buttonDarkMode', '☀');
-        changeCSSById('buttonDarkMode', 'padding', '1px 5px 2px 5px');
+        //changeCSSById('buttonDarkMode', 'padding', '1px 5px 2px 5px');
         prefersDarkMode = false;
     } else {
         changeTextById('buttonDarkMode', '☽');
-        changeCSSById('buttonDarkMode', 'padding', '1px 8px 2px 8px');
+        //changeCSSById('buttonDarkMode', 'padding', '1px 8px 2px 8px');
         prefersDarkMode = true
     }
 
@@ -331,5 +332,19 @@ function lightMode(card){
         card.style.color = 'black';
     } else if (card.classList.contains('standard-color')){
         card.style.color = '#330f5c';
+    }
+}
+
+function adminLogin(){
+    var username = prompt("Digite seu nome de usuário:");
+    var password = prompt("Digite sua senha:");
+    
+    if (username === "admin" && password === "2024") {
+      alert("Login bem-sucedido!");
+      hideElement('loginSection');
+      showElement('feedDataSection');
+      showElement('buttonBack');
+    } else {
+      alert("Login ou senha incorretos. Tente novamente.");
     }
 }
