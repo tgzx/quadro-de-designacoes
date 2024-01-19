@@ -80,15 +80,15 @@ document.addEventListener('DOMContentLoaded', function() { // como se fosse o Co
         if (theme === 'dark') {
             // Aplica o tema escuro
             changeTextById('buttonDarkMode', '☽');
-            changeCSSById('buttonDarkMode', 'padding', '1px 8px 2px 8px');
+            changeCSSById('buttonDarkMode', 'padding', '2px 9px 4px 9px');
             prefersDarkMode = true;
 
             loadingImage.style.filter = 'invert(0.86)';
             body.style.backgroundColor = '#0f1114';
         } else {
             // Aplica o tema claro
-            changeTextById('buttonDarkMode', '☀');
-            changeCSSById('buttonDarkMode', 'padding', '1px 5px 2px 5px');
+            changeTextById('buttonDarkMode', '☀');                //C   D   B    E
+            changeCSSById('buttonDarkMode', 'padding', '3px 7px 4px 7px');
             prefersDarkMode = false;
 
             loadingImage.style.filter = 'invert(0)';

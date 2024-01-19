@@ -65,7 +65,7 @@ body {
     background-color: #ffffff; /* Fundo branco */
     border: 1px solid #d8dde6; /* Borda semelhante ao Salesforce */
     border-radius: 0.25rem; /* Borda arredondada */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); /* Sombra leve */
+    /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); Sombra leve */
     padding: 1rem;
     margin: 0.5rem;
 }
@@ -75,6 +75,14 @@ body {
     max-width: 100%;
     height: auto; /* Isso garante que a altura seja ajustada proporcionalmente à largura */
     width: 400px;
+}
+
+.parent-card{
+    padding-top: 10px;
+    border-radius: 0.25rem;
+    background-color: rgba(183, 180, 180, 0.2);
+    border: 0.5px solid rgba(255, 255, 255, 0.195);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .head-window{
