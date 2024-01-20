@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quadro de Anúncios</title>
     <link rel="stylesheet" href="assignment-card.css">
+    <link rel="stylesheet" href="utils.css">
 </head>
 <body id="htmlBody">
 
@@ -30,11 +31,17 @@
                 </h4>
     
                 <h4 class="standard-color principal-subtitle">Digite seu nome</h4>
-                <div class="align-between-st">
+                <div class="align-between-st autocomplete">
                     <!-- Input e botão para o usuário adicionar o nome -->
                     <input class="input-name" type="text" id="inputName" placeholder="Seu nome aqui">
                     <button onclick="search()">Buscar</button>
+
                 </div>
+
+                <label class="container body-standard-text">Apenas desginações da semana
+                    <input id="checkBoxWeek" type="checkbox" checked="checked" onclick="checkBoxChange()">
+                    <span class="checkmark"></span>
+                </label>
             </div>
         </div>
     
@@ -59,7 +66,7 @@
         </div>
 
         <div id="feedDataSection" style="display: none;">
-            <div class="card card-principal">
+            <div class="card card-principal" style="display: flex; flex-direction: column;">
                 <h3 class="principal-title standard-color designation-screen">
                     <span >Cadastrar designações</span>
                     <!-- <span id="week-info" class="week-info">-//-</span> -->
@@ -67,17 +74,34 @@
                 </h3>
 
                 <h4 id="meioDeSemana" class="standard-color">Nome do designado:</h4>
-                <input class="input-name" type="text" id="inputNameAssign" placeholder="Digite o nome aqui">
+
+                <!-- <form autocomplete="off" action="">
+                    <div class="autocomplete">
+                        <input class="input-name" type="text" id="inputNameAssign" placeholder="Digite o nome aqui">
+                    </div>
+                </form> -->
+
+                <div class="align-between-st autocomplete">
+                    <!-- Input e botão para o usuário adicionar o nome -->
+                    <input class="input-name" type="text" id="inputNameAssign" placeholder="Digite o nome aqui">
+                    
+                </div>
     
                 <h4 id="meioDeSemana" class="standard-color">Designação:</h4>
-                <input class="input-name" type="text" id="workAssign" placeholder="Digite a designação aqui">
+                <div class="align-between-st autocomplete">
+                    <input class="input-name" type="text" id="workAssign" placeholder="Digite a designação aqui">
+                </div>
     
                 <h4 id="meioDeSemana" class="standard-color">Parte:</h4>
-                <input class="input-name" type="text" id="presentationAssign" placeholder="Digite a parte aqui">
+                <div class="align-between-st autocomplete">
+                    <input class="input-name" type="text" id="presentationAssign" placeholder="Digite a parte aqui">
+                </div>
+
+                <button style="margin: 0.8rem 0px 0px 0px;" onclick="search()">Buscar</button>
             </div>
         </div>
     </div>
-
-    <script src="assignment-card.js"></script>
+    <script type="text/javascript" src="assignment-card.js"></script>
+    <script type="text/javascript" src="utils.js"></script>
 </body>
 </html>

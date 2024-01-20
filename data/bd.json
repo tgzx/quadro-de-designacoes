@@ -1,10 +1,10 @@
 {
     "weeklyAssignments": [
         {
-            "date": "20/01/2024",
+            "date": "21/01/2024",
             "presenters": [
                 {
-                    "name": "Tiago",
+                    "name": "Tiago Moreira",
                     "presentations": [
                         {
                             "meetTheme": "Faça seu melhor no Ministério",
@@ -24,14 +24,48 @@
                             "name": "Indicador",
                             "meetId": "fimDeSemana"
                         },
-                                                {
+                        {
                             "name": "Volante",
                             "meetId": "meioDeSemana"
                         }
                     ]
                 },
                 {
+                    "name": "Tiago Alves",
+                    "presentations": [
+                        {
+                            "meetTheme": "Vida e Ministério",
+                            "name": "Leitura",
+                            "lesson": "",
+                            "meetId": "meioDeSemana"
+                        }
+                    ],
+                    "works": []
+                },
+                {
                     "name": "Lucas",
+                    "presentations": [
+                        {
+                            "meetTheme": "Faça seu melhor no Ministério",
+                            "name": "Leitura de livro",
+                            "lesson": "",
+                            "meetId": "meioDeSemana"
+                        }
+                    ],
+                    "works": [
+                        {
+                            "name": "Som",
+                            "meetId": "fimDeSemana"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "date": "10/02/2024",
+            "presenters": [
+                {
+                    "name": "Tiago Moreira",
                     "presentations": [
                         {
                             "meetTheme": "Faça seu melhor no Ministério",

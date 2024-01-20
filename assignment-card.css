@@ -27,6 +27,10 @@ h4{
     /* .card-principal{
         width: 300px;
     } */
+
+    .container.body-standard-text{
+        font-size: 65%;
+    }
 }
 
 @media screen and (min-width: 501px) and (max-width: 767px){
@@ -43,6 +47,10 @@ h4{
     /* .card-principal{
         width: 300px;
     } */
+
+    .container.body-standard-text{
+        font-size: 70%;
+    }
 }
 
 @media screen and (min-width: 768px) {
@@ -60,6 +68,10 @@ h4{
     #loginSection {
         font-size: 150%;
         width: 600px;
+    }
+
+    .container.body-standard-text{
+        font-size: 40%;
     }
 }
 
@@ -185,3 +197,72 @@ input:focus {
     flex-grow: 1; /* Ocupa todo o espaço disponível */
     margin-right: 0.3rem;
 }
+
+/* Customize the label (the container) */
+.container {    
+    font-size: 40%;
+    margin: 0.3rem 0rem 0rem 0rem;
+    display: block;
+    position: relative;
+    padding-left: 20px;
+    cursor: pointer;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+  
+  /* Hide the browser's default checkbox */
+  .container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+  }
+  
+  /* Create a custom checkbox */
+  .checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 15px;
+    width: 15px;
+    background-color: #f3d8ff;
+    border: 1px solid gray;
+  }
+  
+  /* On mouse-over, add a grey background color */
+  .container:hover input ~ .checkmark {
+    background-color: #ccc;
+  }
+  
+  /* When the checkbox is checked, add a blue background */
+  .container input:checked ~ .checkmark {
+    background-color: #6d24cc;
+  }
+  
+  /* Create the checkmark/indicator (hidden when not checked) */
+  .checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+  }
+  
+  /* Show the checkmark when checked */
+  .container input:checked ~ .checkmark:after {
+    display: block;
+  }
+  
+  /* Style the checkmark/indicator */
+  .container .checkmark:after {
+    left: 4px;
+    top: -1px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+  }
