@@ -29,7 +29,7 @@ h4{
     } */
 
     .container.body-standard-text{
-        font-size: 65%;
+        font-size: 70%;
     }
 }
 
@@ -53,6 +53,16 @@ h4{
     }
 }
 
+.head-title{
+    color: white;
+    align-self: center;
+    text-shadow: 1px 1px 2px black;
+}
+
+.load-section{
+    text-align: center;
+}
+
 @media screen and (min-width: 768px) {
     body{
         /* height: 80vh; */
@@ -61,7 +71,7 @@ h4{
     }
 
     .card-principal {
-        min-width: 300px;
+        min-width: 500px;
         max-width: 800px;
     }
 
@@ -71,7 +81,11 @@ h4{
     }
 
     .container.body-standard-text{
-        font-size: 40%;
+        font-size: 45%;
+    }
+
+    .container.body-standard-text.assignment-checkbox{
+        font-size: 60% !important;
     }
 }
 
