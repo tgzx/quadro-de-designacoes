@@ -2,6 +2,11 @@
 
 today = null;
 onlyWeekPresentation = true;
+savedTheme = '';
+nameFound = false;
+designationsMiddleWeek = '';
+designationsEndWeek = '';
+
 
 function showLoading() {
     document.getElementById('loadingSection').style.display = 'block';
@@ -20,9 +25,9 @@ function search() {
     let name = document.getElementById('inputName').value;
 
     if (name !== "" && name !== undefined) {
-        hideElement('loginSection');
-        showElement('assigmentsSection');
-        showElement('buttonBack');
+        hideElementLoad('loginSection');
+        showElementLoad('assigmentsSection');
+        showElementLoad('buttonBack');
         readAssignmentsBD(name);
         document.getElementById('inputName').value = "";
     } else {
@@ -31,12 +36,13 @@ function search() {
 }
 
 function backButton(home) {
-    hideElement('assigmentsSection');
-    hideElement('feedDataSection');
-    showElement(home);
+    hideElementLoad('assigmentsSection');
+    hideElementLoad('feedDataSection');
+    showElementLoad(home);
 
     if(home === 'loginSection'){
-        hideElement('buttonBack');
+        hideElementLoad('buttonBack');
+        showElement('adminButton');
         changeTextById('meioDeSemana-assignment', 'Nenhuma designação encontrada.'); 
         changeTextById('fimDeSemana-assignment', 'Nenhuma designação encontrada.');
         activeFocusElement('inputName', 1800);
@@ -52,15 +58,21 @@ function activeFocusElement(elementId, timeDelay = 0) {
     }, timeDelay);
 }
 
-function hideElement(element){
+function hideElementLoad(element){
     document.getElementById(element).style.display = 'none';
     showLoading();
 }
-function showElement(element){
+function showElementLoad(element){
     setTimeout(function() {
         document.getElementById(element).style.display = 'block';
         hideLoading();
     }, 1500);
+}
+function hideElement(element){
+    document.getElementById(element).style.display = 'none';
+}
+function showElement(element){
+    document.getElementById(element).style.display = '';
 }
 function changeTextById(elementId, newText) {
     const element = document.getElementById(elementId);
@@ -82,8 +94,6 @@ function changeCSSById(elementId, styleProperty, value) {
     }
 }
 
-
-
 function getPresenter() {
     // let name = document.getElementById('inputNameAssign').value;
     // //console.log('name => ' + name);
@@ -103,11 +113,6 @@ function getPresenter() {
         //console.log('presenters => ' + JSON.stringify(presenters));
     });
 } 
-
-
-nameFound = false;
-designationsMiddleWeek = '';
-designationsEndWeek = '';
 
 function readAssignmentsBD(name) {
     const bdJSONPath = 'data/bd.json';
@@ -288,9 +293,100 @@ function dateFormatter(data) {
     return `Semana ${firstWeekDay}-${lastWeekDay} de ${monthName}`;
 }
 
+function saveNewAccount(newAccountName) { // pegar o value do input e jogar aqui
+    // JSON file path
+    const bdJSONPath = 'data/bd-accounts.json';
+
+    // Load the existing JSON data
+    fetch(bdJSONPath)
+        .then(response => response.json())
+        .then(data => {
+            // Check if the account already exists
+            if (accountExists(data.accounts, newAccountName)) {
+                alert('This account already exists. Please choose another name.');
+            } else {
+                // Add the new account to the array of accounts
+                data.accounts.push({ "name": newAccountName });
+
+                // Write the updated data back to the JSON file
+                const updatedData = JSON.stringify(data);
+
+                // Update the JSON file with the new data
+                fetch(bdJSONPath, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: updatedData,
+                })
+                .then(() => {
+                    console.log('New account saved successfully.');
+                    alert('New account saved successfully!');
+                })
+                .catch(error => {
+                    console.error('Error saving the new account:', error);
+                    alert('Error saving the new account. Please try again.');
+                });
+            }
+        })
+        .catch(error => console.error('Error loading the JSON file:', error));
+}
+
+function accountExists(accounts, accountName) {
+    // Check if the account already exists in the array
+    return accounts.some(account => account.name === accountName);
+}
+
+function applyTheme(theme) {
+    const loadingImage = document.getElementById('loadingImage');
+    const body = document.getElementById('htmlBody');
+    const buttonDarkMode = document.getElementById('buttonDarkMode');
+
+    if (theme === 'dark') {
+        // Aplica o tema escuro
+        changeTextById('buttonDarkMode', '☽');
+        //changeCSSById('buttonDarkMode', 'padding', '2px 9px 4px 9px');
+        prefersDarkMode = true;
+
+        loadingImage.style.filter = 'invert(0.86)';
+        body.style.backgroundColor = '#0f1114';
+    } else {
+        // Aplica o tema claro
+        changeTextById('buttonDarkMode', '☀');                //C   D   B    E
+        //changeCSSById('buttonDarkMode', 'padding', '3px 7px 4px 7px');
+        prefersDarkMode = false;
+
+        loadingImage.style.filter = 'invert(0)';
+        body.style.backgroundColor = '#625298';
+    }
+
+    // Atualiza o tema para outros elementos
+    const cards = document.querySelectorAll('.card, .standard-color, .body-standard-text, .principal-title, .input-name');
+    cards.forEach(card => {
+        if (theme === 'dark') {
+            darkMode(card);
+        } else {
+            lightMode(card);
+        }
+    });
+}
+
+// Função para alternar entre temas
+function toggleTheme() {
+    const currentTheme = localStorage.getItem('theme');
+
+    if (currentTheme === 'dark') {
+        localStorage.setItem('theme', 'light');
+        applyTheme('light');
+    } else {
+        localStorage.setItem('theme', 'dark');
+        applyTheme('dark');
+    }
+}
+
 document.addEventListener('DOMContentLoaded', function() { // como se fosse o ConnectedCallBack
     //console.log('O DOM foi completamente carregado.');
-    showElement('loginSection');
+    showElementLoad('loginSection');
     today = new Date();
     // today.setDate(today.getDate() + 2); pra teste
     changeTextById('week-info', dateFormatter(today));
@@ -300,7 +396,7 @@ document.addEventListener('DOMContentLoaded', function() { // como se fosse o Co
         autocomplete(document.getElementById("inputName"), presenters);
     }, 1000); // Você pode ajustar o tempo de espera conforme necessário
     // Carrega a preferência de tema salva no localStorage
-    const savedTheme = localStorage.getItem('theme');
+    savedTheme = localStorage.getItem('theme');
     if (savedTheme) {
         applyTheme(savedTheme);
     } else {
@@ -308,53 +404,6 @@ document.addEventListener('DOMContentLoaded', function() { // como se fosse o Co
         updateDarkMode();
     }
 
-    // Função para aplicar o tema
-    function applyTheme(theme) {
-        const loadingImage = document.getElementById('loadingImage');
-        const body = document.getElementById('htmlBody');
-        const buttonDarkMode = document.getElementById('buttonDarkMode');
-
-        if (theme === 'dark') {
-            // Aplica o tema escuro
-            changeTextById('buttonDarkMode', '☽');
-            //changeCSSById('buttonDarkMode', 'padding', '2px 9px 4px 9px');
-            prefersDarkMode = true;
-
-            loadingImage.style.filter = 'invert(0.86)';
-            body.style.backgroundColor = '#0f1114';
-        } else {
-            // Aplica o tema claro
-            changeTextById('buttonDarkMode', '☀');                //C   D   B    E
-            //changeCSSById('buttonDarkMode', 'padding', '3px 7px 4px 7px');
-            prefersDarkMode = false;
-
-            loadingImage.style.filter = 'invert(0)';
-            body.style.backgroundColor = '#625298';
-        }
-
-        // Atualiza o tema para outros elementos
-        const cards = document.querySelectorAll('.card, .standard-color, .body-standard-text, .principal-title, .input-name');
-        cards.forEach(card => {
-            if (theme === 'dark') {
-                darkMode(card);
-            } else {
-                lightMode(card);
-            }
-        });
-    }
-
-    // Função para alternar entre temas
-    function toggleTheme() {
-        const currentTheme = localStorage.getItem('theme');
-
-        if (currentTheme === 'dark') {
-            localStorage.setItem('theme', 'light');
-            applyTheme('light');
-        } else {
-            localStorage.setItem('theme', 'dark');
-            applyTheme('dark');
-        }
-    }
 
     // Adiciona um evento de clique ao botão de tema
     const buttonDarkMode = document.getElementById('buttonDarkMode');
@@ -469,10 +518,11 @@ function adminLogin(){
     
     if (username === "admin" && password === "2024") {
         alert("Login bem-sucedido!");
-        hideElement('assigmentsSection');
-        hideElement('loginSection');
-        showElement('feedDataSection');
-        showElement('buttonBack');
+        hideElementLoad('assigmentsSection');
+        hideElementLoad('loginSection');
+        hideElementLoad('adminButton');
+        showElementLoad('feedDataSection');
+        showElementLoad('buttonBack');
     } else {
         alert("Login ou senha incorretos. Tente novamente.");
     }
@@ -501,6 +551,7 @@ function autocomplete(inp, arr) {
         /*for each item in the array...*/
         // Limitando a exibição aos primeiros 5 países
         var count = 0;
+        let isFind = false;
         for (i = 0; i < arr.length && count < 5; i++) {
             if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
                 b = document.createElement("DIV");
@@ -515,7 +566,14 @@ function autocomplete(inp, arr) {
 
                 a.appendChild(b);
                 count++;
+                isFind = true;
             }
+        }
+
+        if(isFind){
+            hideElement('newPresenter');
+        } else {
+            showElement('newPresenter');
         }
     });
     /*execute a function presses a key on the keyboard:*/
@@ -585,4 +643,74 @@ function simulateKey(elementId, key) {
 
         element.dispatchEvent(keyboardEvent);
     }
+}
+
+countLine = 0;
+
+function addUserRow() {
+    const userList = document.getElementById('user-list');
+
+    const userRow = document.createElement('div');
+    userRow.classList.add('user-row');
+    userRow.classList.add('align-between-st');
+    userRow.classList.add('autocomplete');
+    userRow.classList.add('input-space');
+
+    const nameInput = createInput('Nome', countLine++);
+    const designation = createInput('Designação');
+    const presentationTheme = createInput('Parte');
+
+    const removeButton = document.createElement('span');
+    removeButton.innerText = 'X';
+    removeButton.classList.add('remove-btn');
+    removeButton.onclick = function() {
+        userList.removeChild(userRow);
+    };
+
+    userRow.appendChild(nameInput);
+    userRow.appendChild(designation);
+    userRow.appendChild(presentationTheme);
+    userRow.appendChild(removeButton);
+
+    userList.appendChild(userRow);
+
+    applyTheme(savedTheme);
+}
+
+function createInput(placeholder, a) {
+    const input = document.createElement('input');
+    input.classList.add('input-name');
+    input.type = 'text';
+    input.placeholder = placeholder;
+    if(placeholder = 'Nome'){
+        input.id = `inputNameAssign${a + 1}`; // Adicionando o id único
+    }
+    if(placeholder = 'Designação'){
+        input.id = `workAssign${a + 1}`; // Adicionando o id único
+    }
+    if(placeholder = 'Parte'){
+        input.id = `presentationAssign${a + 1}`; // Adicionando o id único
+    }
+    return input;
+}
+
+function submitData() {
+    const userList = document.getElementById('user-list');
+    const userRows = userList.getElementsByClassName('user-row');
+
+    const userData = [];
+
+    for (let i = 0; i < userRows.length; i++) {
+        const userRow = userRows[i];
+        const name = userRow.children[0].value;
+        const age = userRow.children[1].value;
+        const city = userRow.children[2].value;
+
+        if (name && age && city) {
+            userData.push({ name, age, city });
+        }
+    }
+
+    // Aqui você pode fazer o que quiser com os dados, como enviar para o servidor
+    console.log('Dados enviados:', userData);
 }

@@ -85,7 +85,6 @@ h4{
     border-radius: 0.25rem; /* Borda arredondada */
     /* box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5); Sombra leve */
     padding: 1rem;
-    margin: 0.5rem;
 }
 
 #loadingSection img {
@@ -96,7 +95,8 @@ h4{
 }
 
 .parent-card {
-    padding-top: 10px;
+    padding: 0.3rem;
+    padding-top: 5px;
     border-radius: 0.25rem;
     background-color: rgba(183, 180, 180, 0.2);
     border: 0.5px solid rgba(255, 255, 255, 0.195);
@@ -104,6 +104,7 @@ h4{
 }
 
 .head-window {
+    padding-bottom: 0.3rem;
     display: flex;
     flex-direction: row; 
     justify-content: space-between;
@@ -198,6 +199,16 @@ input:focus {
     margin-right: 0.3rem;
 }
 
+.input-space{
+    margin: 0.2rem;
+}
+
+.feed-body{
+    display: flex;
+    flex-direction: row; 
+    justify-content: space-between;
+    align-items: flex-end;
+}
 /* Customize the label (the container) */
 .container {    
     font-size: 40%;
