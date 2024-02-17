@@ -97,7 +97,7 @@ function generateAccessToken() {
         if (!response.ok) {
             throw new Error('Erro ao gerar token de acesso');
         } else {
-            console.log('DEU CERTO ', response)
+            console.log('DEU CERTO ', response.body)
         }
         return response.json();
     })
