@@ -102,8 +102,7 @@ function generateAccessToken() {
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded'
         },
-        body: body,
-        mode: 'no-cors' // Definindo o modo de requisição como 'no-cors'
+        body: body
     })
     .then(response => {
         if (!response.ok) {
