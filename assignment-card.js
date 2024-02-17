@@ -7,6 +7,7 @@ nameFound = false;
 designationsMiddleWeek = '';
 designationsEndWeek = '';
 waitLoadTime = 1500;
+findedUser = '';
 
 
 function showLoading() {
@@ -47,13 +48,89 @@ function search() {
         hideElementLoad('loginSection');
         showElementLoad('assigmentsSection');
         showElementLoad('buttonBack');
-        //readAssignmentsBD(name);
+        findUser(name);
         updateUserLogged();
         document.getElementById('inputName').value = "";
     } else {
         alert("Por favor, digite seu nome antes de buscar.");
     }    
 }
+
+function findUser(name) {
+    generateAccessToken();
+}
+
+function isTokenExpired(token) {
+    // Verifica se o token possui a propriedade 'expires_in'
+    if (!token.expires_in) {
+        return true; // Se não tiver, considera-se como expirado por precaução
+    }
+    
+    // Obtém a data de expiração do token em milissegundos
+    const expirationTime = token.created_at + (token.expires_in * 1000);
+    
+    // Obtém a data atual em milissegundos
+    const currentTime = Date.now();
+    
+    // Compara a data atual com a data de expiração
+    return currentTime >= expirationTime;
+}
+
+
+function generateAccessToken() {
+    const url = 'https://login.salesforce.com/services/oauth2/token?';
+    const body = 'grant_type=password' +
+        '&username=designacao-tiago.z.x.g@gmail.com' +
+        '&password=Batata2020salesforce' +
+        '&client_id=3MVG9dqyJqDc8eKQAcqTfLAZP9rbFZrQkiNpXF7J9WfN_XTa9.z6SLocXY130UULhAAMFjOt._iObBAiVsyd8' +
+        '&client_secret=3084CCF545CC7412DE5B0BFC7A0A9008CC9A83B0EE59B190F8953F26B892140C';
+
+    fetch(url, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: body
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Erro ao gerar token de acesso');
+        } else {
+            console.log('DEU CERTO ', response)
+        }
+        return response.json();
+    })
+    .then(data => data.access_token)
+    .catch(error => {
+        throw error;
+    });
+}
+
+function getUser(name, token) {
+    const url = `https://nscara5-dev-ed.develop.my.salesforce.com/services/data/v56.0/query?q=SELECT+Id,Name+FROM+Account+WHERE+Name+LIKE+'%25${name}%25'`;
+
+    fetch(url, {
+        method: 'GET',
+        headers: {
+            'Authorization': 'Bearer ' + token
+        }
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Erro ao consultar Salesforce');
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log('Contas encontradas:', data);
+        if(data.lengh === 1){
+            findedUser = data.Name;
+        }
+        // Faça o que precisar com os dados encontrados
+    })
+    .catch(error => console.error('Erro na consulta ao Salesforce:', error));
+}
+
 
 function backButton(home) {
     hideElementLoad('assigmentsSection');
