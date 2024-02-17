@@ -85,6 +85,7 @@ function generateAccessToken() {
         '&client_id=3MVG9dqyJqDc8eKQAcqTfLAZP9rbFZrQkiNpXF7J9WfN_XTa9.z6SLocXY130UULhAAMFjOt._iObBAiVsyd8' +
         '&client_secret=3084CCF545CC7412DE5B0BFC7A0A9008CC9A83B0EE59B190F8953F26B892140C';
 
+    console.log('body', body);
     fetch(url, {
         method: 'POST',
         headers: {
