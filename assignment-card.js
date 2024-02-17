@@ -57,7 +57,19 @@ function search() {
 }
 
 function findUser(name) {
-    generateAccessToken();
+    let token = localStorage.getItem('tokenSF');
+
+    if (!token || isTokenExpired(token)) {
+        generateAccessToken()
+            .then(newToken => {
+                console.log('newToken => ', newToken);
+                localStorage.setItem('tokenSF', newToken);
+                getUser(name, newToken);
+            })
+            .catch(error => console.error("Erro ao gerar token de acesso:", error));
+    } else {
+        getUser(name, token);
+    }
 }
 
 function isTokenExpired(token) {
@@ -85,8 +97,7 @@ function generateAccessToken() {
         '&client_id=3MVG9dqyJqDc8eKQAcqTfLAZP9rbFZrQkiNpXF7J9WfN_XTa9.z6SLocXY130UULhAAMFjOt._iObBAiVsyd8' +
         '&client_secret=3084CCF545CC7412DE5B0BFC7A0A9008CC9A83B0EE59B190F8953F26B892140C';
 
-    console.log('body', body);
-    fetch(url, {
+    return fetch(url, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded'
@@ -96,8 +107,6 @@ function generateAccessToken() {
     .then(response => {
         if (!response.ok) {
             throw new Error('Erro ao gerar token de acesso');
-        } else {
-            console.log('DEU CERTO => ' + JSON.stringify(response))
         }
         return response.json();
     })
@@ -117,6 +126,7 @@ function getUser(name, token) {
         }
     })
     .then(response => {
+        console.log('response ', response);
         if (!response.ok) {
             throw new Error('Erro ao consultar Salesforce');
         }
