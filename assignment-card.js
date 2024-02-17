@@ -78,7 +78,7 @@ function isTokenExpired(token) {
 
 
 function generateAccessToken() {
-    const url = 'https://login.salesforce.com/services/oauth2/token?';
+    const url = 'https://login.salesforce.com/services/oauth2/token';
     const body = 'grant_type=password' +
         '&username=designacao-tiago.z.x.g@gmail.com' +
         '&password=Batata2020salesforce' +
@@ -89,7 +89,7 @@ function generateAccessToken() {
     fetch(url, {
         method: 'POST',
         headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/x-www-form-urlencoded'
         },
         body: body
     })
