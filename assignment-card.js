@@ -108,13 +108,20 @@ function generateAccessToken() {
         if (!response.ok) {
             throw new Error('Erro ao gerar token de acesso');
         }
+        // Adicione este console.log para depurar o token de acesso retornado
+        console.log('Resposta da solicitação:', response);
         return response.json();
     })
-    .then(data => data.access_token)
+    .then(data => {
+        // Adicione este console.log para depurar o token de acesso retornado
+        console.log('Token de acesso retornado:', data.access_token);
+        return data.access_token;
+    })
     .catch(error => {
         throw error;
     });
 }
+
 
 function getUser(name, token) {
     const url = `https://nscara5-dev-ed.develop.my.salesforce.com/services/data/v56.0/query?q=SELECT+Id,Name+FROM+Account+WHERE+Name+LIKE+'%25${name}%25'`;
