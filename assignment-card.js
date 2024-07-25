@@ -380,6 +380,7 @@ function toggleTheme() {
 }
 
 document.addEventListener('DOMContentLoaded', function() { // como se fosse o ConnectedCallBack
+    console.log('teste de carregamento de tela');
     showElementLoad('loginSection');
     today = new Date();
     // today.setDate(today.getDate() + 2); pra teste
